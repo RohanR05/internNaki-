@@ -1,34 +1,64 @@
 import CredentialsProvider from "next-auth/providers/credentials";
+import dbConnect, { collectionNames } from "./dbConntect";
+import bcrypt from "bcryptjs";
 
 export const authOptions = {
   providers: [
     CredentialsProvider({
-      // The name to display on the sign in form (e.g. "Sign in with...")
       name: "Credentials",
-      // `credentials` is used to generate a form on the sign in page.
-      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-      // e.g. domain, username, password, 2FA token, etc.
-      // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        email: { label: "Email", type: "text", placeholder: "jsmith@email.com" },
         password: { label: "Password", type: "password" },
-        email: { label: "email", type: "email" },
       },
-      async authorize(credentials, req) {
-        console.log(credentials);
-        // Add logic here to look up the user from the credentials supplied
-        const user = credentials
+      async authorize(credentials) {
+        const { email, password } = credentials;
 
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          return user;
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null;
+        const user = await dbConnect(collectionNames.REGISTER).findOne({ email });
+        if (!user) return null;
 
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-        }
+        const isPasswordOK = await bcrypt.compare(password, user.password);
+        if (!isPasswordOK) return null;
+
+        return {
+          id: user._id.toString(),
+          name: user.name,
+          email: user.email,
+          role: user.role || "user", // optional extra field
+        };
       },
     }),
   ],
+
+  // 🔥 Callbacks
+  callbacks: {
+    async jwt({ token, user }) {
+      // Runs on sign in and whenever token is checked
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        token.role = user.role; // custom field if you need roles
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      // Control what gets sent to the client
+      if (token) {
+        session.user.id = token.id;
+        session.user.role = token.role; // expose role
+      }
+      return session;
+    },
+  },
+
+  // Optional: customize session strategy
+  session: {
+    strategy: "jwt",
+  },
+
+pages: {
+  signIn: "/login", // matches /app/login/page.jsx
+},
+
 };
