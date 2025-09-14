@@ -57,7 +57,7 @@ const page = async () => {
                   {job.application_deadline}
                 </p>
                 <div className="card-actions justify-end mt-4">
-                  <Link href={`/jobs/${job._id}`}>
+                  <Link href={`/job/${job._id}`}>
                     <button className="btn btn-primary text-neutral">
                       Details
                     </button>
