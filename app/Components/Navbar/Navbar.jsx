@@ -13,8 +13,11 @@ const Navbar = () => {
 
   const links = (
     <>
-      <li>
-        <Link href="/">Home</Link>
+      <li className="font-medium text-lg ">
+        <Link href={"/"}>Home</Link>
+      </li>
+      <li className="font-medium text-lg ">
+        <Link href={"/job"}>Job Post</Link>
       </li>
     </>
   );

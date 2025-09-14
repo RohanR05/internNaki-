@@ -54,6 +54,7 @@ export const authOptions = {
             email: user.email,
             image: user.image,
             name: user.name,
+            role: "user",
           };
 
           const userCollection = await dbConnect(collectionNames.REGISTER);
