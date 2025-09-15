@@ -1,3 +1,4 @@
+import FeaturedJobs from "./Components/FeaturedJobs/FeaturedJobs";
 import Banner from "./Components/HomeSection/Banner";
 import JobStatistic from "./Components/JobStatistic/JobStatistic";
 import TotalUser from "./Components/TotoalUser/TotoalUser";
@@ -8,6 +9,7 @@ export default function Home() {
       <Banner></Banner>
       <TotalUser></TotalUser>
       <JobStatistic></JobStatistic>
+      <FeaturedJobs></FeaturedJobs>
     </div>
   );
 }
