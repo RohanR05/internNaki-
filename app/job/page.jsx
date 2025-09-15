@@ -1,7 +1,7 @@
 import Link from "next/link";
 import dbConnect, { collectionNames } from "../lib/dbConntect";
 
-const page = async () => {
+const JobPost = async () => {
   const jobCollection = await dbConnect(collectionNames.JOB);
   const data = await jobCollection.find({}).toArray();
 
@@ -72,4 +72,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default JobPost;

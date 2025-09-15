@@ -9,7 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.87.4",
+    "@tanstack/react-query-devtools": "^5.87.4",
+    "@types/react": "^19.1.13",
     "bcryptjs": "^3.0.2",
+    "class-variance-authority": "^0.7.1",
     "daisyui": "^5.1.10",
     "lucide-react": "^0.544.0",
     "mongodb": "^6.19.0",
@@ -17,7 +21,8 @@
     "next-auth": "^4.24.11",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "sweetalert2": "^11.23.0"
+    "sweetalert2": "^11.23.0",
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

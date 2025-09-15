@@ -1,12 +1,12 @@
 import dbConnect, { collectionNames } from "@/app/lib/dbConntect";
 import { ObjectId } from "mongodb";
 import Link from "next/link";
+import { Briefcase, MapPin, Calendar, Gift, DollarSign, User } from "lucide-react";
 
-// This is a Server Component
 const JobDetails = async ({ params }) => {
   const { id } = params;
 
-  // connect DB
+  // Connect DB
   const jobCollection = await dbConnect(collectionNames.JOB);
   const job = await jobCollection.findOne({ _id: new ObjectId(id) });
 
@@ -19,59 +19,77 @@ const JobDetails = async ({ params }) => {
   }
 
   return (
-    <div className="max-w-screen-md mx-auto p-6 bg-accent rounded-xl shadow-md shadow-primary my-6 md:my-12 lg:my-16">
-      <h1 className="text-3xl font-bold text-primary mb-4">{job.title}</h1>
-      <p className="text-lg text-secondary mb-2">{job.company}</p>
-      <p className="text-primary/80 mb-4">{job.location || "Remote"}</p>
+    <div className="max-w-3xl mx-auto my-10 p-8 bg-white dark:bg-accent rounded-2xl shadow-lg border">
+      {/* Header */}
+      <div className="mb-6 text-center">
+        <h1 className="text-3xl font-bold text-primary">{job.title}</h1>
+        <p className="text-lg text-secondary mt-2 flex items-center justify-center gap-2">
+          <Briefcase className="w-5 h-5 text-primary" />
+          {job.company}
+        </p>
+        <p className="text-sm text-gray-500 mt-1 flex items-center justify-center gap-1">
+          <MapPin className="w-4 h-4" />
+          {job.location || "Remote"}
+        </p>
+      </div>
 
       {/* Job Description */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-primary mb-2">
-          Job Description
-        </h2>
-        <p className="text-secondary font-medium leading-relaxed">
-          {job.description}
-        </p>
-      </div>
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-primary mb-2">📝 Job Description</h2>
+        <p className="text-secondary leading-relaxed">{job.description}</p>
+      </section>
 
       {/* Requirements */}
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-primary mb-2">
-          Requirements
-        </h2>
-        <ul className="list-disc list-inside space-y-1 text-secondary">
-          {job.requirements?.map((req, idx) => (
-            <li key={idx}>{req}</li>
-          ))}
-        </ul>
-      </div>
+      {job.requirements?.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold text-primary mb-2">✅ Requirements</h2>
+          <ul className="list-disc list-inside space-y-1 text-secondary">
+            {job.requirements.map((req, idx) => (
+              <li key={idx}>{req}</li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* Salary & Benefits */}
-      <div className="mb-6">
-        <p className="text-primary">
-          <span className="font-semibold text-secondary">💰 Salary: </span>
-          {job.salary_range || "Negotiable"}
-        </p>
-        <p className="text-primary mt-2">
-          <span className="font-semibold text-secondary">🎁 Benefits: </span>
-          {job.benefits?.join(", ")}
-        </p>
-      </div>
+      <section className="mb-8 grid sm:grid-cols-2 gap-6">
+        <div className="flex items-center gap-2 text-primary">
+          <DollarSign className="w-5 h-5" />
+          <span>
+            <span className="font-semibold text-secondary">Salary: </span>
+            {job.salary_range || "Negotiable"}
+          </span>
+        </div>
+        <div className="flex items-center gap-2 text-primary">
+          <Gift className="w-5 h-5" />
+          <span>
+            <span className="font-semibold text-secondary">Benefits: </span>
+            {job.benefits?.length ? job.benefits.join(", ") : "Not mentioned"}
+          </span>
+        </div>
+      </section>
 
       {/* Deadline */}
-      <div className="mb-6">
-        <p className="text-red-500 font-semibold">
-          📅 Application Deadline: {job.application_deadline}
-        </p>
-      </div>
+      {job.application_deadline && (
+        <section className="mb-8 flex items-center gap-2 text-red-500 font-semibold">
+          <Calendar className="w-5 h-5" />
+          <span>Application Deadline: {job.application_deadline}</span>
+        </section>
+      )}
 
-      {/* Apply Button */}
-      <div className="mt-6 text-center">
-        <button className="btn btn-primary">Apply Now</button>
-      </div>
-      <div className="mb-4">
-        <Link href="/job">
-          <button className="btn btn-primary">⬅ Back to Jobs</button>
+      {/* HR Info */}
+      <section className="mb-8 border-t pt-4">
+        <h2 className="text-lg font-semibold text-primary mb-2">👤 Posted by</h2>
+        <p className="text-secondary flex items-center gap-2">
+          <User className="w-5 h-5" /> {job.hr_name} ({job.hr_email})
+        </p>
+      </section>
+
+      {/* Actions */}
+      <div className="flex flex-col sm:flex-row gap-4 mt-6">
+        <button className="btn btn-primary flex-1">Apply Now</button>
+        <Link href="/job" className="flex-1">
+          <button className="btn btn-outline w-full">⬅ Back to Jobs</button>
         </Link>
       </div>
     </div>
