@@ -2,24 +2,23 @@ import dbConnect, { collectionNames } from "@/app/lib/dbConntect";
 import { ObjectId } from "mongodb";
 import Link from "next/link";
 import { Briefcase, MapPin, Calendar, Gift, DollarSign, User } from "lucide-react";
+import ApplyForm from "./applyForm";
 
 const JobDetails = async ({ params }) => {
   const { id } = params;
 
-  // Connect DB
+  // Connect to DB
   const jobCollection = await dbConnect(collectionNames.JOB);
   const job = await jobCollection.findOne({ _id: new ObjectId(id) });
 
   if (!job) {
-    return (
-      <div className="max-w-screen-md mx-auto p-6 text-center text-red-500">
-        ❌ Job not found
-      </div>
-    );
+    return <div className="text-center text-red-500 p-6">❌ Job not found</div>;
   }
 
   return (
-    <div className="max-w-3xl mx-auto my-10 p-8 bg-white dark:bg-accent rounded-2xl shadow-lg border">
+    <div className="max-w-3xl mx-auto my-10 p-8 bg-accent dark:bg-accent rounded-2xl shadow-lg border">
+      <h2 className="text-center font-bold text-3xl text-secondary">Job Details</h2>
+      
       {/* Header */}
       <div className="mb-6 text-center">
         <h1 className="text-3xl font-bold text-primary">{job.title}</h1>
@@ -85,11 +84,17 @@ const JobDetails = async ({ params }) => {
         </p>
       </section>
 
-      {/* Actions */}
-      <div className="flex flex-col sm:flex-row gap-4 mt-6">
-        <button className="btn btn-primary flex-1">Apply Now</button>
-        <Link href="/job" className="flex-1">
-          <button className="btn btn-outline w-full">⬅ Back to Jobs</button>
+      {/* Apply Form */}
+      <section className="mb-8">
+        <h2 className="text-lg font-semibold text-primary mb-4">📝 Apply for this job</h2>
+   <ApplyForm jobId={job._id.toString()} />
+
+      </section>
+
+      {/* Back Button */}
+      <div className="flex justify-start mt-6">
+        <Link href="/job">
+          <button className="btn btn-outline">⬅ Back to Jobs</button>
         </Link>
       </div>
     </div>

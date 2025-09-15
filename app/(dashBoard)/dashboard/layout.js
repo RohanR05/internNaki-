@@ -9,7 +9,7 @@ const DashBoardLayout = ({ children }) => {
       <li>
         <Link
           href="/"
-          className="flex items-center gap-2 text-white hover:text-secondary"
+          className="flex items-center gap-2 text-neutral hover:text-secondary"
         >
           <Home size={18} /> Home
         </Link>
@@ -17,7 +17,7 @@ const DashBoardLayout = ({ children }) => {
       <li>
         <Link
           href="/dashboard/jobPost"
-          className="flex items-center gap-2 text-white hover:text-secondary"
+          className="flex items-center gap-2 text-neutral hover:text-secondary"
         >
           <Briefcase size={18} /> Job Poste
         </Link>
@@ -25,17 +25,17 @@ const DashBoardLayout = ({ children }) => {
       <li>
         <Link
           href="/dashboard/postedByHR"
-          className="flex items-center gap-2 text-white hover:text-secondary"
+          className="flex items-center gap-2 text-neutral hover:text-secondary"
         >
           <User size={18} /> Posted By HR
         </Link>
       </li>
       <li>
         <Link
-          href="/dashboard/settings"
-          className="flex items-center gap-2 text-white hover:text-secondary"
+          href="/dashboard/appliedJobPost"
+          className="flex items-center gap-2 text-neutral hover:text-secondary"
         >
-          <Settings size={18} /> Settings
+          <Settings size={18} /> Applied Job Post
         </Link>
       </li>
     </>

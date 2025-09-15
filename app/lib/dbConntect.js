@@ -2,7 +2,8 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 
 export const collectionNames = {
   JOB: "job_posts",
-  REGISTER:'registerUser'
+  REGISTER:'registerUser',
+  APPLICATIONS:'applicants'
 };
 
 function dbConnect(collectionName) {
