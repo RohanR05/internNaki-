@@ -23,6 +23,12 @@ const Navbar = () => {
       <li className="font-medium text-lg">
         <Link href="/dashboard">Dashboard</Link>
       </li>
+      <li className="font-medium text-lg">
+        <Link href="/aboutUs">About Us</Link>
+      </li>
+      <li className="font-medium text-lg">
+        <Link href="/contactUs">Contact Us</Link>
+      </li>
     </>
   );
 
