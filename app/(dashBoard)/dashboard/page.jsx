@@ -54,7 +54,7 @@ const DashBoard = () => {
           <p className="text-primary">{user.email}</p>
 
           {/* Role */}
-          <span className="badge badge-secondary mt-2">
+          <span className="badge badge-secondary font-bold text-primary mt-2">
             {user.role || "user"}
           </span>
 
