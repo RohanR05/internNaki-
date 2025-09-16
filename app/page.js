@@ -1,3 +1,4 @@
+import FAQ from "./Components/FAQ/FAQ";
 import FeaturedJobs from "./Components/FeaturedJobs/FeaturedJobs";
 import Banner from "./Components/HomeSection/Banner";
 import JobStatistic from "./Components/JobStatistic/JobStatistic";
@@ -12,6 +13,7 @@ export default function Home() {
       <JobStatistic></JobStatistic>
       <FeaturedJobs></FeaturedJobs>
       <Testimonials></Testimonials>
+      <FAQ></FAQ>
     </div>
   );
 }
