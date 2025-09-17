@@ -1,5 +1,9 @@
 # Job Portal Web Application
 
+hr Name: 1111
+hr email: 111@gmail.com
+hr password: 06647607
+
 ![Next.js](https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white&style=flat-square)
 ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black&style=flat-square)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?logo=tailwind-css&logoColor=white&style=flat-square)
