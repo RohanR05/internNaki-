@@ -17,13 +17,13 @@ export default function Home() {
   return (
     <div className="max-w-screen-xl mx-auto my-6 md:my-12 lg:my-16 space-y-12">
       {/* Banner with fade-in */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
         <Banner />
-      </motion.div>
+      </motion.div> */}
 
       {/* Total User */}
       <motion.div
