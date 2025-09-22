@@ -26,14 +26,14 @@ export default function Home() {
       </motion.div> */}
 
       {/* Total User */}
-      <motion.div
+      {/* <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         variants={sectionVariants}
       >
         <TotalUser />
-      </motion.div>
+      </motion.div> */}
 
       {/* Job Statistics */}
       <motion.div
